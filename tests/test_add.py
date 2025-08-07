@@ -2,25 +2,40 @@ import pytest
 from add import add_numbers, subtract_numbers
 
 def test_add_numbers():
-    assert add_numbers(1, 2) == 3
-    assert add_numbers(-1, 1) == 0
-    assert add_numbers(0, 0) == 0
-    assert add_numbers(1.5, 2.5) == 4.0
-    assert add_numbers(10**6, 10**6) == 2000000
+    # Normal cases
+    assert add_numbers(3, 2) == 5
+    assert add_numbers(0, 5) == 5
+    assert add_numbers(-3, -2) == -5
     
+    # Edge cases
+    assert add_numbers(-3, 5) == 2
+    assert add_numbers(0, -5) == -5
+    assert add_numbers(0.1, 0.2) == 0.3
+    
+    # Type error cases
     with pytest.raises(TypeError):
-        add_numbers("a", 1)
+        add_numbers("3", 2)
     with pytest.raises(TypeError):
-        add_numbers(None, 1)
+        add_numbers([1], 2)
+    with pytest.raises(TypeError):
+        add_numbers(None, 2)
+
 
 def test_subtract_numbers():
-    assert subtract_numbers(5, 3) == 2
-    assert subtract_numbers(3, 5) == -2
-    assert subtract_numbers(0, 0) == 0
-    assert subtract_numbers(1.5, 0.5) == 1.0
-    assert subtract_numbers(10**6, 10**6) == 0
+    # Normal cases
+    assert subtract_numbers(5, 2) == 3
+    assert subtract_numbers(5, 0) == 5
+    assert subtract_numbers(5, -2) == 7
     
+    # Edge cases
+    assert subtract_numbers(-3, 2) == -5
+    assert subtract_numbers(-5, 0) == -5
+    assert subtract_numbers(0.5, 0.2) == 0.3
+    
+    # Type error cases
     with pytest.raises(TypeError):
-        subtract_numbers("a", 1)
+        subtract_numbers("5", 2)
     with pytest.raises(TypeError):
-        subtract_numbers(None, 1)
+        subtract_numbers([1], 2)
+    with pytest.raises(TypeError):
+        subtract_numbers(2, None)
